@@ -18,8 +18,11 @@ public class LibroController {
     }
 
     /**
-     * GET /api/libros
-     * Devuelve la lista completa de libros
+     * Obtiene todos los libros disponibles en el sistema.
+     * 
+     * @return Lista de todos los libros
+     * @HTTP GET /api/libros
+     * @responseStatus 200 OK
      */
     @GetMapping
     public List<Libro> obtenerTodos() {
@@ -27,8 +30,13 @@ public class LibroController {
     }
 
     /**
-     * GET /api/libros/{id}
-     * Devuelve un libro por su ID
+     * Obtiene un libro específico por su identificador.
+     * 
+     * @param id El identificador único del libro a buscar
+     * @return ResponseEntity con el libro encontrado
+     * @HTTP GET /api/libros/{id}
+     * @responseStatus 200 OK si se encuentra el libro
+     * @responseStatus 404 NOT FOUND si no existe el libro con el ID especificado
      */
     @GetMapping("/{id}")
     public ResponseEntity<Libro> obtenerPorId(@PathVariable Long id) {
@@ -40,8 +48,13 @@ public class LibroController {
     }
 
     /**
-     * POST /api/libros
-     * Crea un nuevo libro
+     * Crea un nuevo libro en el sistema.
+     * 
+     * @param libro El objeto Libro con los datos a guardar (sin ID)
+     * @return ResponseEntity con el libro creado, incluyendo su ID generado
+     * @HTTP POST /api/libros
+     * @requestBody Objeto Libro sin ID
+     * @responseStatus 200 OK con el libro creado
      */
     @PostMapping
     public ResponseEntity<Libro> crear(@RequestBody Libro libro) {
@@ -49,8 +62,15 @@ public class LibroController {
     }
 
     /**
-     * PUT /api/libros/{id}
-     * Actualiza un libro existente por su ID
+     * Actualiza un libro existente en el sistema.
+     * 
+     * @param id El identificador único del libro a actualizar
+     * @param libro El objeto Libro con los nuevos datos (el ID en el cuerpo se ignorará)
+     * @return ResponseEntity con el libro actualizado
+     * @HTTP PUT /api/libros/{id}
+     * @requestBody Objeto Libro con los datos actualizados
+     * @responseStatus 200 OK si se actualiza correctamente
+     * @responseStatus 404 NOT FOUND si no existe el libro con el ID especificado
      */
     @PutMapping("/{id}")
     public ResponseEntity<Libro> actualizar(@PathVariable Long id, @RequestBody Libro libro) {
@@ -62,8 +82,13 @@ public class LibroController {
     }
 
     /**
-     * DELETE /api/libros/{id}
-     * Elimina un libro por su ID
+     * Elimina un libro del sistema por su identificador.
+     * 
+     * @param id El identificador único del libro a eliminar
+     * @return ResponseEntity sin contenido
+     * @HTTP DELETE /api/libros/{id}
+     * @responseStatus 204 NO CONTENT si se elimina correctamente
+     * @responseStatus 404 NOT FOUND si no existe el libro con el ID especificado
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
